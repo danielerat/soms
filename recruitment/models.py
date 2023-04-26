@@ -1,45 +1,27 @@
-
 # Create your models here.
-from django.conf import settings
+from django.conf import Settings
 from django.db import models
+from organization.models import Cohort, Stack
+TRAINEE_GENDER = (
+    ("M", "Male"),
+    ("F", "Female"),
+)
 
 
-# Solvit/ Enterprise models
-
-class Cohort(models.Model):
-    cohort_name = models.CharField(max_length=255)
-    cohort_counter = models.IntegerField()
-    starting_date = models.DateTimeField()
-    ending_date = models.DateTimeField()
-
-
-# Keeps track of all stacks of a given cohorts
-class Stacks(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    starting_date = models.DateTimeField()
-
-# Keeps track of a given organization
-
-
-class Organization(models.Model):
-    name = models.CharField(max_length=244)
-    description = models.TextField()
-    website = models.URLField()
-    country = models.CharField(100)
-    province = models.CharField(100)
-    district = models.CharField(100)
-    sector = models.CharField(100)
-    address = models.CharField(100)
-    logo = models.ImageField(default="default.jpg",
-                             upload_to=f"media/organization")
-    phone_number = models.CharField(max_length=244)
-
-
-class OrganizationPosition(models.Model):
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete=models.PROTECT, null=True)
-    title = models.CharField()
-    since = models.DateField()
-
-# -----------------------------------------------------
+class Application(models.Model):
+    first_name = models.CharField(max_length=255, blank=False, null=False)
+    last_name = models.CharField(max_length=255, blank=False, null=False)
+    email = models.EmailField(max_length=255, blank=False, null=False)
+    gender = models.CharField(
+        max_length=2, choices=TRAINEE_GENDER, blank=False, null=False)
+    phone_number = models.CharField(max_length=10, blank=False, null=False)
+    cohort = models.ForeignKey(
+        Cohort, on_delete=models.CASCADE, blank=True, null=True)
+    stack = models.ForeignKey(
+        Stack, on_delete=models.CASCADE, blank=True, null=True)
+    resume = models.FileField(upload_to="media/applications/resume")
+    province = models.CharField(max_length=50)
+    district = models.CharField(max_length=50)
+    dob = models.DateField()
+    interviewed = models.BooleanField(default=False)
+    approved = models.BooleanField(default=False)
