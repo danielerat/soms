@@ -17,6 +17,8 @@ class Cohort(models.Model):
     ending_date = models.DateTimeField()
 
 
+
+
 # Keeps track of all stacks of a given cohorts
 class Stack(models.Model):
     name = models.CharField(max_length=255)
