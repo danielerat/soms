@@ -8,6 +8,7 @@ django = "*"
 djangorestframework = "*"
 pillow = "*"
 python-dotenv = "*"
+mysqlclient = "*"
 
 [dev-packages]
 autopep8 = "*"
