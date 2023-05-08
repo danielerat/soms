@@ -11,6 +11,7 @@ python-dotenv = "*"
 mysqlclient = "*"
 pyjwt = "*"
 drf-spectacular = "*"
+drf-nested-routers = "*"
 
 [dev-packages]
 autopep8 = "*"
