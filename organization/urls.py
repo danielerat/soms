@@ -11,6 +11,8 @@ organization_router.register(
     'cohort', views.CohortViewset, basename='cohorts')
 organization_router.register(
     'stack', views.StackViewset, basename='stacks')
+organization_router.register(
+    'trainer', views.TrainerViewset, basename='trainers')
 
 
 urlpatterns = [
