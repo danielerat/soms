@@ -24,12 +24,16 @@ class CohortSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cohort
         fields = [
-            "id"
+            "id",
             "cohort_name",
             "cohort_counter",
             "starting_date",
             "ending_date",
         ]
+
+    def create(self, validated_data):
+        organization_id = self.context['organization_pk']
+        return Cohort.objects.create(organization_id=organization_id, **validated_data)
 
 
 class StackSerializer(serializers.ModelSerializer):
@@ -41,6 +45,8 @@ class StackSerializer(serializers.ModelSerializer):
             "description",
             "starting_date",
         ]
+
+# Trainer serialzier
 
 
 class TrainerSerializer(serializers.ModelSerializer):
@@ -60,6 +66,8 @@ class TrainerSerializer(serializers.ModelSerializer):
             "district",
             "dob",
         ]
+
+# Trainee serializer
 
 
 class TraineeSerializer(serializers.ModelSerializer):

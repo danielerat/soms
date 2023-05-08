@@ -11,6 +11,8 @@ TRAINEE_GENDER = (
 
 
 class Cohort(models.Model):
+    organization = models.OneToOneField(
+        "organization", on_delete=models.CASCADE)
     cohort_name = models.CharField(max_length=255)
     cohort_counter = models.IntegerField()
     starting_date = models.DateTimeField()
