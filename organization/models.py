@@ -18,15 +18,21 @@ class Cohort(models.Model):
     starting_date = models.DateTimeField()
     ending_date = models.DateTimeField()
 
+    def __str__(self) -> str:
+        return self.cohort_name+f"({str(self.cohort_counter)})"
 
 # Keeps track of all stacks of a given cohorts
+
+
 class Stack(models.Model):
     organization = models.ForeignKey(
-        "organization", related_name="stacks", on_delete=models.CASCADE)
+        "Organization", related_name="stacks", on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField()
     starting_date = models.DateTimeField()
 
+    def __str__(self) -> str:
+        return self.name
 # Keeps track of a given organization
 
 
@@ -60,6 +66,9 @@ class TrainerPosition(models.Model):
 
 
 class Trainer(models.Model):
+    organization = models.ForeignKey(
+        Organization, related_name="trainers", on_delete=models.CASCADE)
+
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, related_name="trainer", on_delete=models.CASCADE)
     first_name = models.CharField(max_length=255, blank=False, null=False)
@@ -80,6 +89,9 @@ class Trainer(models.Model):
 
 
 class Trainee(models.Model):
+    organization = models.ForeignKey(
+        Organization, related_name="trainee", on_delete=models.CASCADE)
+
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, related_name="trainee", on_delete=models.CASCADE)
     first_name = models.CharField(max_length=255, blank=False, null=False)
