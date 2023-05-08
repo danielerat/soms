@@ -3,6 +3,9 @@ from organization.models import Cohort, Organization, Stack, Trainee, Trainer
 
 
 class OrganizationSerializer(serializers.ModelSerializer):
+    cohorts = serializers.StringRelatedField(many=True)
+    stacks = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = Organization
         fields = [
@@ -16,7 +19,10 @@ class OrganizationSerializer(serializers.ModelSerializer):
             "sector",
             "address",
             "logo",
-            "phone_number"
+            "phone_number",
+            "cohorts",
+            "stacks",
+
         ]
 
 
