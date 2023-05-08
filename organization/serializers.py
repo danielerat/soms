@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from organization.models import Cohort, Organization
+from organization.models import Cohort, Organization, Stack
 
 
 class OrganizationSerializer(serializers.ModelSerializer):
@@ -29,4 +29,15 @@ class CohortSerializer(serializers.ModelSerializer):
             "cohort_counter",
             "starting_date",
             "ending_date",
+        ]
+
+
+class StackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Stack
+        fields = [
+            "id"
+            "name",
+            "description",
+            "starting_date",
         ]
