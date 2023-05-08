@@ -29,7 +29,6 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, null=False,
                               blank=False)
 
-
     # set the phone_number field as the USERNAME_FIELD
     USERNAME_FIELD = 'phone_number'
 
@@ -38,21 +37,26 @@ class User(AbstractUser):
     # set the CustomUserManager as the default manager
     objects = CustomUserManager()
 
+    def __str__(self) -> str:
+        return f"{self.phone_number}=>{self.email}"
+
 
 class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
-    bio=models.TextField()
+    bio = models.TextField()
     image = models.ImageField(default="default.jpg",
                               upload_to=f"media/profiles/")
-    dob=models.DateField()
+    dob = models.DateField()
     social_instagram = models.CharField(max_length=200, blank=True, null=True)
     social_twitter = models.CharField(max_length=200, blank=True, null=True)
     social_linkedin = models.CharField(max_length=200, blank=True, null=True)
     social_website = models.CharField(max_length=200, blank=True, null=True)
 # Creating the Address Model
+
+
 class Address(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,related_name="address",
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="address",
                              on_delete=models.CASCADE)
     province = models.CharField(max_length=250, null=True)
     district = models.CharField(max_length=250, null=True)
