@@ -9,6 +9,8 @@ organization_router = routers.NestedSimpleRouter(
 
 organization_router.register(
     'cohort', views.CohortViewset, basename='cohorts')
+organization_router.register(
+    'stack', views.StackViewset, basename='stacks')
 
 
 urlpatterns = [
