@@ -40,11 +40,15 @@ class StackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Stack
         fields = [
-            "id"
+            "id",
             "name",
             "description",
             "starting_date",
         ]
+
+    def create(self, validated_data):
+        organization_id = self.context['organization_pk']
+        return Stack.objects.create(organization_id=organization_id, **validated_data)
 
 # Trainer serialzier
 
