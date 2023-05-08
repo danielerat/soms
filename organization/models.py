@@ -11,8 +11,8 @@ TRAINEE_GENDER = (
 
 
 class Cohort(models.Model):
-    organization = models.OneToOneField(
-        "organization", on_delete=models.CASCADE)
+    organization = models.ForeignKey(
+        "organization", related_name="cohorts", on_delete=models.CASCADE)
     cohort_name = models.CharField(max_length=255)
     cohort_counter = models.IntegerField()
     starting_date = models.DateTimeField()
@@ -21,6 +21,8 @@ class Cohort(models.Model):
 
 # Keeps track of all stacks of a given cohorts
 class Stack(models.Model):
+    organization = models.ForeignKey(
+        "organization", related_name="stacks", on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField()
     starting_date = models.DateTimeField()
