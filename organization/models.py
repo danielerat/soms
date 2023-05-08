@@ -41,12 +41,18 @@ class Organization(models.Model):
 
 
 class OrganizationPosition(models.Model):
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, related_name="position", on_delete=models.PROTECT, null=True)
-    title = models.CharField(max_length=244)
+    name = models.CharField(max_length=244)
     since = models.DateField()
 # -----------------------------------------------------
 # Peopler Who are Training in the cohort
+
+
+class TrainerPosition(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name="position", on_delete=models.CASCADE)
+    position = models.ForeignKey(
+        OrganizationPosition, on_delete=models.CASCADE
+    )
 
 
 class Trainer(models.Model):
