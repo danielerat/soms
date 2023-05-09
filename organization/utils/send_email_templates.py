@@ -3,7 +3,7 @@ from django.template.loader import render_to_string
 from django.conf import settings
 
 
-def send_welcome_email(to, names):
+def send_acceptance_email(to, names):
     # Render the email template
     email_template = render_to_string(
         'emails/successful_application.html', {'names': names})
