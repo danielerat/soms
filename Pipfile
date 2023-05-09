@@ -9,10 +9,16 @@ djangorestframework = "*"
 pillow = "*"
 python-dotenv = "*"
 mysqlclient = "*"
+<<<<<<< HEAD
 django-phonenumber-field = {extras = ["phonenumbers"], version = "*"}
 drf-nested-routers = "*"
 drf-spectacular = "*"
 djoser = "*"
+=======
+pyjwt = "*"
+drf-spectacular = "*"
+drf-nested-routers = "*"
+>>>>>>> d102bef2efc7dfcd53fb7a924d7188e14a22aa48
 
 [dev-packages]
 autopep8 = "*"

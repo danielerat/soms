@@ -7,6 +7,12 @@ TRAINEE_GENDER = (
     ("F", "Female"),
 )
 
+APPROVAL_STATUS = (
+    ("A", "Accepted"),
+    ("D", "Declined"),
+    ("P", "Pending")
+)
+
 
 class Application(models.Model):
     first_name = models.CharField(max_length=255, blank=False, null=False)
@@ -24,4 +30,5 @@ class Application(models.Model):
     district = models.CharField(max_length=50)
     dob = models.DateField()
     interviewed = models.BooleanField(default=False)
-    approved = models.BooleanField(default=False)
+    application_status = models.CharField(
+        max_length=1, default="P", choices=APPROVAL_STATUS, blank=False, null=False)
