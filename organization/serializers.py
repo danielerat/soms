@@ -111,9 +111,11 @@ class TraineeSerializer(serializers.ModelSerializer):
 
 
 class ApplicationSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Application
         fields = [
+            "id",
             "first_name",
             "last_name",
             "email",
@@ -125,7 +127,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
             "district",
             "dob",
             "interviewed",
-            "approved"
+            "application_status"
         ]
         extra_kwargs = {
             'first_name': {'read_only': True},
