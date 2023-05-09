@@ -4,6 +4,8 @@ from organization import views
 router = routers.DefaultRouter()
 router.register('organization', views.OrganizationViewset,
                 basename='organizations')
+router.register('application', views.ApplicationViewset,
+                basename='applications')
 organization_router = routers.NestedSimpleRouter(
     router, 'organization', lookup='organization')
 
