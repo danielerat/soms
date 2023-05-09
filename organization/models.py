@@ -87,15 +87,10 @@ class Trainer(models.Model):
 class Trainee(models.Model):
     organization = models.ForeignKey(
         Organization, related_name="trainee", on_delete=models.CASCADE)
-
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, related_name="trainee", on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=255, blank=False, null=False)
-    last_name = models.CharField(max_length=255, blank=False, null=False)
-    email = models.EmailField(max_length=255, blank=False, null=False)
     gender = models.CharField(
         max_length=2, choices=TRAINEE_GENDER, blank=False, null=False)
-    phone_number = models.CharField(max_length=10, blank=False, null=False)
     cohort = models.ForeignKey(
         Cohort, on_delete=models.CASCADE, blank=True, null=True)
     stack = models.ForeignKey(
