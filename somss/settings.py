@@ -153,3 +153,9 @@ SPECTACULAR_SETTINGS = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "authentication.User"
+
+EMAIL_HOST = os.environ.get('GMAIL_EMAIL_HOST', '')
+EMAIL_PORT = os.environ.get('GMAIL_EMAIL_PORT', '')
+EMAIL_USE_TLS = os.environ.get('GMAIL_EMAIL_USE_TLS', '')
+EMAIL_HOST_USER = os.environ.get('GMAIL_EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('GMAIL_EMAIL_HOST_PASSWORD', '')
