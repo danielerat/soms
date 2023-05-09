@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from organization.models import Cohort, Organization, Stack, Trainer
-from organization.serializers import CohortSerializer, OrganizationSerializer, StackSerializer, TrainerSerializer
+from organization.serializers import ApplicationSerializer, CohortSerializer, OrganizationSerializer, StackSerializer, TrainerSerializer
+from recruitment.models import Application
 # Create your views here.
 
 
@@ -39,3 +40,8 @@ class TrainerViewset(ModelViewSet):
 
     def get_serializer_context(self):
         return {"organization_pk": self.kwargs["organization_pk"]}
+
+
+class ApplicationViewset(ModelViewSet):
+    serializer_class = ApplicationSerializer
+    queryset = Application.objects.all()

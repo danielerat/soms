@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from authentication.models import User
 from organization.models import Cohort, Organization, Stack, Trainee, Trainer
+from recruitment.models import Application
 
 
 class SimpleUserSerializer(serializers.ModelSerializer):
@@ -107,3 +108,33 @@ class TraineeSerializer(serializers.ModelSerializer):
             "district",
             "dob",
         ]
+
+
+class ApplicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Application
+        fields = [
+            "first_name",
+            "last_name",
+            "email",
+            "gender",
+            "phone_number",
+            "stack",
+            "resume",
+            "province",
+            "district",
+            "dob",
+            "interviewed",
+            "approved"
+        ]
+        extra_kwargs = {
+            'first_name': {'read_only': True},
+            'last_name': {'read_only': True},
+            'email': {'read_only': True},
+            'gender': {'read_only': True},
+            'phone_number': {'read_only': True},
+            'resume': {'read_only': True},
+            'province': {'read_only': True},
+            'district': {'read_only': True},
+            'dob': {'read_only': True},
+        }
