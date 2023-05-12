@@ -3,11 +3,14 @@ from django.template.loader import render_to_string
 from django.conf import settings
 
 
-def send_acceptance_email(to, names):
+def send_application_status_email(to, names, status):
     # Render the email template
-    email_template = render_to_string(
-        'emails/successful_application.html', {'names': names})
-
+    if status:
+        email_template = render_to_string(
+            'emails/successful_application.html', {'names': names})
+    else:
+        email_template = render_to_string(
+            'emails/declined_application.html', {'names': names})
     # Create an EmailMessage object
     email = EmailMessage(
         'Welcome At Streamlining Device Tracking',  # Subject of the email

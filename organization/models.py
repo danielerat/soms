@@ -22,7 +22,6 @@ class Cohort(models.Model):
         return self.cohort_name+f"({str(self.cohort_counter)})"
 
 
-
 # Keeps track of all stacks of a given cohorts
 
 
@@ -50,6 +49,9 @@ class Organization(models.Model):
     logo = models.ImageField(default="default.jpg",
                              upload_to=f"media/organization")
     phone_number = models.CharField(max_length=244)
+
+    def __str__(self):
+        return f"{self.name}@{self.phone_number}"
 
 
 class OrganizationPosition(models.Model):

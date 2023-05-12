@@ -1,7 +1,6 @@
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from recruitment.serializers import ApplySerializer
-from rest_framework.views import APIView
-
 # Endpoint to receive applications from users.
 
 
