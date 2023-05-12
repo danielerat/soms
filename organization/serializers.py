@@ -68,7 +68,7 @@ class StackSerializer(serializers.ModelSerializer):
 
 
 class TrainerSerializer(serializers.ModelSerializer):
-    user = SimpleUserSerializer()
+    user = SimpleUserSerializer(read_only=True)
 
     class Meta:
         model = Trainer
@@ -91,16 +91,14 @@ class TrainerSerializer(serializers.ModelSerializer):
 
 
 class TraineeSerializer(serializers.ModelSerializer):
+    user = SimpleUserSerializer(read_only=True)
+
     class Meta:
         model = Trainee
         fields = [
             "id",
             "user",
-            "first_name",
-            "last_name",
-            "email",
             "gender",
-            "phone_number",
             "cohort",
             "stack",
             "resume",
@@ -108,6 +106,10 @@ class TraineeSerializer(serializers.ModelSerializer):
             "district",
             "dob",
         ]
+
+    def create(self, validated_data):
+        organization_id = self.context['organization_pk']
+        return Trainee.objects.create(organization_id=organization_id, **validated_data)
 
 
 class ApplicationSerializer(serializers.ModelSerializer):
