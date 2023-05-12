@@ -103,3 +103,13 @@ class Trainee(models.Model):
     province = models.CharField(max_length=50)
     district = models.CharField(max_length=50)
     dob = models.DateField()
+
+
+# Keep track of those who were outsourced
+class Outsource(models.Model):
+    organization = models.ForeignKey(
+        Organization, related_name="outsource", on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, related_name="outsource", on_delete=models.CASCADE)
+    outsource_to = models.CharField(max_length=255)
+    date = models.DateTimeField(auto_now=True)
