@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.decorators import action
 from organization.models import Cohort, Organization, Stack, Trainer, Trainee
-from organization.serializers import ApplicationSerializer, CohortSerializer, OrganizationSerializer, StackSerializer, TrainerSerializer, TraineeSerializer
+from organization.serializers import ApplicationSerializer, CohortSerializer, OrganizationSerializer, StackSerializer, TrainerSerializer, TraineeSerializer, OutsourceSerializer
 from recruitment.models import Application
+from rest_framework.response import Response
 # Create your views here.
 
 
@@ -46,10 +48,16 @@ class TraineeViewset(ModelViewSet):
     serializer_class = TraineeSerializer
 
     def get_queryset(self):
-        return Trainee.objects.filter(organization_id=self.kwargs['organization_pk'])
 
-    def get_serializer_context(self):
-        return {"organization_pk": self.kwargs["organization_pk"]}
+        return Trainee.objects.filter()
+
+    @action(detail=True, methods=['post'])
+    def outsource(self, request, organization_pk=None, pk=None):
+        serializer = OutsourceSerializer(
+            data=request.data, context={"organization_pk": organization_pk, "trainee_pk": pk, "request": self.request})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({'message': 'Trainee Oursourced Successfully.'})
 
 
 class ApplicationViewset(ModelViewSet):
