@@ -1,14 +1,14 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db import transaction
-from organization.utils.send_email_templates import send_acceptance_email
+from organization.utils.send_email_templates import send_application_status_email
 from recruitment.models import Application
 from authentication.models import User
 from organization.models import Cohort, Organization, Trainee
 
 
 @receiver(post_save, sender=Application)
-def change_device_transfer_status(sender, instance, created, **kwargs):
+def change_applicant_status(sender, instance, created, **kwargs):
     if not created:
         # User Accepts the device.
         if instance.application_status == "A":
@@ -37,8 +37,17 @@ def change_device_transfer_status(sender, instance, created, **kwargs):
                     dob=instance.dob
                 )
                 try:
-                    send_acceptance_email(user.email, user.get_full_name())
+                    send_application_status_email(
+                        user.email, user.get_full_name(), True)
                 except:
                     print("Email could not be sent")
                 # Delete the pending device
                 instance.delete()
+        else:
+            print(instance.first_name)
+            print(instance.email)
+            try:
+                send_application_status_email(
+                    instance.email, instance.first_name, False)
+            except:
+                print("Email could not be sent")
