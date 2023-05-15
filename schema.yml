@@ -1,0 +1,1542 @@
+openapi: 3.0.3
+info:
+  title: SOMS
+  version: 1.0.0
+  description: A solution to employment
+paths:
+  /application/:
+    get:
+      operationId: application_list
+      tags:
+      - application
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Application'
+          description: ''
+    post:
+      operationId: application_create
+      tags:
+      - application
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Application'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Application'
+      security:
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+          description: ''
+  /application/{id}/:
+    get:
+      operationId: application_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this application.
+        required: true
+      tags:
+      - application
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+          description: ''
+    put:
+      operationId: application_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this application.
+        required: true
+      tags:
+      - application
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Application'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Application'
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+          description: ''
+    patch:
+      operationId: application_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this application.
+        required: true
+      tags:
+      - application
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedApplication'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedApplication'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedApplication'
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+          description: ''
+    delete:
+      operationId: application_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this application.
+        required: true
+      tags:
+      - application
+      security:
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /auth/forgot/:
+    post:
+      operationId: auth_forgot_create
+      tags:
+      - auth
+      security:
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /auth/login/:
+    post:
+      operationId: auth_login_create
+      tags:
+      - auth
+      security:
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /auth/logout/:
+    post:
+      operationId: auth_logout_create
+      tags:
+      - auth
+      security:
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /auth/refresh/:
+    post:
+      operationId: auth_refresh_create
+      tags:
+      - auth
+      security:
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /auth/register/:
+    post:
+      operationId: auth_register_create
+      tags:
+      - auth
+      security:
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /auth/reset/:
+    post:
+      operationId: auth_reset_create
+      tags:
+      - auth
+      security:
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /auth/user/:
+    get:
+      operationId: auth_user_retrieve
+      tags:
+      - auth
+      security:
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /auth/user/check:
+    post:
+      operationId: auth_user_check_create
+      tags:
+      - auth
+      security:
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /organization/:
+    get:
+      operationId: organization_list
+      tags:
+      - organization
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organization'
+          description: ''
+    post:
+      operationId: organization_create
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Organization'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Organization'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Organization'
+        required: true
+      security:
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+          description: ''
+  /organization/{organization_pk}/cohort/:
+    get:
+      operationId: organization_cohort_list
+      parameters:
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cohort'
+          description: ''
+    post:
+      operationId: organization_cohort_create
+      parameters:
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cohort'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Cohort'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Cohort'
+        required: true
+      security:
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cohort'
+          description: ''
+  /organization/{organization_pk}/cohort/{id}/:
+    get:
+      operationId: organization_cohort_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cohort'
+          description: ''
+    put:
+      operationId: organization_cohort_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cohort'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Cohort'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Cohort'
+        required: true
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cohort'
+          description: ''
+    patch:
+      operationId: organization_cohort_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCohort'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCohort'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCohort'
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cohort'
+          description: ''
+    delete:
+      operationId: organization_cohort_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      security:
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /organization/{organization_pk}/stack/:
+    get:
+      operationId: organization_stack_list
+      parameters:
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Stack'
+          description: ''
+    post:
+      operationId: organization_stack_create
+      parameters:
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Stack'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Stack'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Stack'
+        required: true
+      security:
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stack'
+          description: ''
+  /organization/{organization_pk}/stack/{id}/:
+    get:
+      operationId: organization_stack_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stack'
+          description: ''
+    put:
+      operationId: organization_stack_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Stack'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Stack'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Stack'
+        required: true
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stack'
+          description: ''
+    patch:
+      operationId: organization_stack_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedStack'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedStack'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedStack'
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stack'
+          description: ''
+    delete:
+      operationId: organization_stack_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      security:
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /organization/{organization_pk}/trainee/:
+    get:
+      operationId: organization_trainee_list
+      parameters:
+      - in: path
+        name: organization_pk
+        schema:
+          type: integer
+        required: true
+      tags:
+      - organization
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trainee'
+          description: ''
+    post:
+      operationId: organization_trainee_create
+      parameters:
+      - in: path
+        name: organization_pk
+        schema:
+          type: integer
+        required: true
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trainee'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Trainee'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Trainee'
+        required: true
+      security:
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trainee'
+          description: ''
+  /organization/{organization_pk}/trainee/{id}/:
+    get:
+      operationId: organization_trainee_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this trainee.
+        required: true
+      - in: path
+        name: organization_pk
+        schema:
+          type: integer
+        required: true
+      tags:
+      - organization
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trainee'
+          description: ''
+    put:
+      operationId: organization_trainee_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this trainee.
+        required: true
+      - in: path
+        name: organization_pk
+        schema:
+          type: integer
+        required: true
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trainee'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Trainee'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Trainee'
+        required: true
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trainee'
+          description: ''
+    patch:
+      operationId: organization_trainee_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this trainee.
+        required: true
+      - in: path
+        name: organization_pk
+        schema:
+          type: integer
+        required: true
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainee'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainee'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainee'
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trainee'
+          description: ''
+    delete:
+      operationId: organization_trainee_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this trainee.
+        required: true
+      - in: path
+        name: organization_pk
+        schema:
+          type: integer
+        required: true
+      tags:
+      - organization
+      security:
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /organization/{organization_pk}/trainee/{id}/outsource/:
+    post:
+      operationId: organization_trainee_outsource_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this trainee.
+        required: true
+      - in: path
+        name: organization_pk
+        schema:
+          type: integer
+        required: true
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trainee'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Trainee'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Trainee'
+        required: true
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trainee'
+          description: ''
+  /organization/{organization_pk}/trainer/:
+    get:
+      operationId: organization_trainer_list
+      parameters:
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trainer'
+          description: ''
+    post:
+      operationId: organization_trainer_create
+      parameters:
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trainer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Trainer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Trainer'
+        required: true
+      security:
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trainer'
+          description: ''
+  /organization/{organization_pk}/trainer/{id}/:
+    get:
+      operationId: organization_trainer_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trainer'
+          description: ''
+    put:
+      operationId: organization_trainer_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trainer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Trainer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Trainer'
+        required: true
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trainer'
+          description: ''
+    patch:
+      operationId: organization_trainer_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainer'
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trainer'
+          description: ''
+    delete:
+      operationId: organization_trainer_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: organization_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - organization
+      security:
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /organization/{id}/:
+    get:
+      operationId: organization_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this organization.
+        required: true
+      tags:
+      - organization
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+          description: ''
+    put:
+      operationId: organization_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this organization.
+        required: true
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Organization'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Organization'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Organization'
+        required: true
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+          description: ''
+    patch:
+      operationId: organization_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this organization.
+        required: true
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedOrganization'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedOrganization'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedOrganization'
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+          description: ''
+    delete:
+      operationId: organization_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this organization.
+        required: true
+      tags:
+      - organization
+      security:
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /recruitment/apply/:
+    post:
+      operationId: recruitment_apply_create
+      tags:
+      - recruitment
+      security:
+      - {}
+      responses:
+        '200':
+          description: No response body
+components:
+  schemas:
+    Application:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+        gender:
+          allOf:
+          - $ref: '#/components/schemas/GenderEnum'
+          readOnly: true
+        phone_number:
+          type: string
+          readOnly: true
+        stack:
+          type: integer
+          nullable: true
+        resume:
+          type: string
+          format: uri
+          readOnly: true
+        province:
+          type: string
+          readOnly: true
+        district:
+          type: string
+          readOnly: true
+        dob:
+          type: string
+          format: date
+          readOnly: true
+        interviewed:
+          type: boolean
+        application_status:
+          $ref: '#/components/schemas/ApplicationStatusEnum'
+      required:
+      - district
+      - dob
+      - email
+      - first_name
+      - gender
+      - id
+      - last_name
+      - phone_number
+      - province
+      - resume
+    ApplicationStatusEnum:
+      enum:
+      - A
+      - D
+      - P
+      type: string
+      description: |-
+        * `A` - Accepted
+        * `D` - Declined
+        * `P` - Pending
+    Cohort:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        cohort_name:
+          type: string
+          maxLength: 255
+        cohort_counter:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        starting_date:
+          type: string
+          format: date-time
+        ending_date:
+          type: string
+          format: date-time
+      required:
+      - cohort_counter
+      - cohort_name
+      - ending_date
+      - id
+      - starting_date
+    GenderEnum:
+      enum:
+      - M
+      - F
+      type: string
+      description: |-
+        * `M` - Male
+        * `F` - Female
+    Organization:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 244
+        description:
+          type: string
+        website:
+          type: string
+          format: uri
+          maxLength: 200
+        country:
+          type: string
+          maxLength: 244
+        province:
+          type: string
+          maxLength: 244
+        district:
+          type: string
+          maxLength: 244
+        sector:
+          type: string
+          maxLength: 244
+        address:
+          type: string
+          maxLength: 244
+        logo:
+          type: string
+          format: uri
+        phone_number:
+          type: string
+          maxLength: 244
+        cohorts:
+          type: array
+          items:
+            type: string
+        stacks:
+          type: array
+          items:
+            type: string
+      required:
+      - address
+      - cohorts
+      - country
+      - description
+      - district
+      - id
+      - name
+      - phone_number
+      - province
+      - sector
+      - stacks
+      - website
+    PatchedApplication:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+        gender:
+          allOf:
+          - $ref: '#/components/schemas/GenderEnum'
+          readOnly: true
+        phone_number:
+          type: string
+          readOnly: true
+        stack:
+          type: integer
+          nullable: true
+        resume:
+          type: string
+          format: uri
+          readOnly: true
+        province:
+          type: string
+          readOnly: true
+        district:
+          type: string
+          readOnly: true
+        dob:
+          type: string
+          format: date
+          readOnly: true
+        interviewed:
+          type: boolean
+        application_status:
+          $ref: '#/components/schemas/ApplicationStatusEnum'
+    PatchedCohort:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        cohort_name:
+          type: string
+          maxLength: 255
+        cohort_counter:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        starting_date:
+          type: string
+          format: date-time
+        ending_date:
+          type: string
+          format: date-time
+    PatchedOrganization:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 244
+        description:
+          type: string
+        website:
+          type: string
+          format: uri
+          maxLength: 200
+        country:
+          type: string
+          maxLength: 244
+        province:
+          type: string
+          maxLength: 244
+        district:
+          type: string
+          maxLength: 244
+        sector:
+          type: string
+          maxLength: 244
+        address:
+          type: string
+          maxLength: 244
+        logo:
+          type: string
+          format: uri
+        phone_number:
+          type: string
+          maxLength: 244
+        cohorts:
+          type: array
+          items:
+            type: string
+        stacks:
+          type: array
+          items:
+            type: string
+    PatchedStack:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        starting_date:
+          type: string
+          format: date-time
+    PatchedTrainee:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          allOf:
+          - $ref: '#/components/schemas/SimpleUser'
+          readOnly: true
+        gender:
+          $ref: '#/components/schemas/GenderEnum'
+        cohort:
+          type: integer
+          nullable: true
+        stack:
+          type: integer
+          nullable: true
+        resume:
+          type: string
+          format: uri
+        province:
+          type: string
+          maxLength: 50
+        district:
+          type: string
+          maxLength: 50
+        dob:
+          type: string
+          format: date
+    PatchedTrainer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          allOf:
+          - $ref: '#/components/schemas/SimpleUser'
+          readOnly: true
+        gender:
+          $ref: '#/components/schemas/GenderEnum'
+        stack:
+          type: integer
+          nullable: true
+        resume:
+          type: string
+          format: uri
+        province:
+          type: string
+          maxLength: 50
+        district:
+          type: string
+          maxLength: 50
+        dob:
+          type: string
+          format: date
+    SimpleUser:
+      type: object
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        phone_number:
+          type: string
+          description: Phone number must be exactly 10 digits and start with '07'
+          pattern: ^07\d{8}$
+          maxLength: 10
+      required:
+      - email
+      - phone_number
+    Stack:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        starting_date:
+          type: string
+          format: date-time
+      required:
+      - description
+      - id
+      - name
+      - starting_date
+    Trainee:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          allOf:
+          - $ref: '#/components/schemas/SimpleUser'
+          readOnly: true
+        gender:
+          $ref: '#/components/schemas/GenderEnum'
+        cohort:
+          type: integer
+          nullable: true
+        stack:
+          type: integer
+          nullable: true
+        resume:
+          type: string
+          format: uri
+        province:
+          type: string
+          maxLength: 50
+        district:
+          type: string
+          maxLength: 50
+        dob:
+          type: string
+          format: date
+      required:
+      - district
+      - dob
+      - gender
+      - id
+      - province
+      - resume
+      - user
+    Trainer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          allOf:
+          - $ref: '#/components/schemas/SimpleUser'
+          readOnly: true
+        gender:
+          $ref: '#/components/schemas/GenderEnum'
+        stack:
+          type: integer
+          nullable: true
+        resume:
+          type: string
+          format: uri
+        province:
+          type: string
+          maxLength: 50
+        district:
+          type: string
+          maxLength: 50
+        dob:
+          type: string
+          format: date
+      required:
+      - district
+      - dob
+      - gender
+      - id
+      - province
+      - resume
+      - user
